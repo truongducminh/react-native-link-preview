@@ -9,7 +9,7 @@ require('es6-promise').polyfill();
 
 const CONSTANTS = require('./constants');
 
-exports.getPreview = function(text, options) {
+exports.getPreview = function(text, options, fetchOptions) {
   return new Promise(function(resolve, reject) {
     if (!text) {
       reject({
@@ -26,7 +26,7 @@ exports.getPreview = function(text, options) {
     });
 
     if (detectedUrl) {
-      fetch(detectedUrl)
+      fetch(detectedUrl, fetchOptions)
         .then(function(response) {
           // get final URL (after any redirects)
           const finalUrl = response.url;
